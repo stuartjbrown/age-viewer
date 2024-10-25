@@ -25,7 +25,7 @@ import { getQuery } from '../tools/SQLFlavorManager';
 
 
 class GraphRepository {
-    constructor({host, port, database, graph, user, password, graphs=[], server} = {}) {
+    constructor({host, port, database, graph, user, password, ssl, graphs=[], server} = {}) {
         this._host = host;
         this._port = port;
         this._database = database;
@@ -34,6 +34,7 @@ class GraphRepository {
         this._graph = graph;
         this._user = user;
         this._password = password;
+        this._ssl = ssl;
     }
     /*
     static async getConnection({
@@ -101,8 +102,10 @@ class GraphRepository {
     }
 
     async initGraphNames(){
+        console.log("retrieving graph names...");
         const { rows } = await this.execute(getQuery('get_graph_names'));
         this._graphs = rows.map((item)=>item.name);
+        console.log("got graphs", this._graphs);
         // set current graph to first name
         this.setCurrentGraph(this._graphs[0]);
     }
@@ -146,6 +149,7 @@ class GraphRepository {
             user: this._user,
             password: this._password,
             max: PgConfig.max,
+            ssl: this._ssl,
             idleTimeoutMillis: PgConfig.idleTimeoutMillis,
             connectionTimeoutMillis: PgConfig.connectionTimeoutMillis,
         };
@@ -167,6 +171,7 @@ class GraphRepository {
             password: this._password,
             graphs: this._graphs,
             graph: this._graph,
+            ssl: this._ssl,
         };
     }
 

@@ -89,6 +89,7 @@ const DatabaseSlice = createSlice({
       port: action.payload.port,
       user: action.payload.user,
       password: action.payload.password,
+      ssl: !!action.payload.ssl,
       database: action.payload.database,
       graph: action.payload.graph,
       status: 'connected',
@@ -100,6 +101,7 @@ const DatabaseSlice = createSlice({
       password: '',
       database: '',
       graph: '',
+      ssl: false,
       status: 'disconnected',
     }),
     [disconnectToDatabase.fulfilled]: () => ({
@@ -109,6 +111,7 @@ const DatabaseSlice = createSlice({
       password: '',
       database: '',
       graph: '',
+      ssl: false,
       status: 'disconnected',
     }),
     [getConnectionStatus.fulfilled]: (state, action) => ({
@@ -118,6 +121,7 @@ const DatabaseSlice = createSlice({
       password: action.payload.password,
       database: action.payload.database,
       graph: action.payload.graph,
+      ssl: !!action.payload.ssl,
       status: 'connected',
     }),
     [getConnectionStatus.rejected]: () => ({
@@ -127,6 +131,7 @@ const DatabaseSlice = createSlice({
       password: '',
       database: '',
       graph: '',
+      ssl: false,
       status: 'disconnected',
     }),
   },

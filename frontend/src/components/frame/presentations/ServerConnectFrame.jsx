@@ -20,7 +20,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Button, Col, Form, Input, InputNumber, Row,
+  Button, Col, Form, Input, InputNumber, Row, Select,
 } from 'antd';
 import { useDispatch } from 'react-redux';
 import Frame from '../Frame';
@@ -36,6 +36,7 @@ const FormInitialValue = {
   graph: '',
   host: '',
   password: '',
+  ssl: false,
   port: null,
   user: '',
 };
@@ -101,6 +102,12 @@ const ServerConnectFrame = ({
               </Form.Item>
               <Form.Item name="password" label="Password" rules={[{ required: true }]}>
                 <Input.Password placeholder="postgres" />
+              </Form.Item>
+              <Form.Item name="ssl" label="SSL?" rules={[{ required: true }]}>
+                <Select>
+                  <Select.Option value="false">false</Select.Option>
+                  <Select.Option value="true">true</Select.Option>
+                </Select>
               </Form.Item>
               <Form.Item>
                 <Button type="primary" htmlType="submit">Connect</Button>
