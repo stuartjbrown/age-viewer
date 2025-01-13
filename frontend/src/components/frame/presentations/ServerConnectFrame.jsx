@@ -105,7 +105,6 @@ const ServerConnectFrame = ({
               </Form.Item>
               <Form.Item name="ssl" label="SSL?" rules={[{ required: true }]}>
                 <Select>
-                  <Select.Option value="false">false</Select.Option>
                   <Select.Option value="true">true</Select.Option>
                 </Select>
               </Form.Item>
